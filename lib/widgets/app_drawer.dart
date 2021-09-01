@@ -109,6 +109,7 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
         ),
       );
+      // add spacer
       menuItems.add(Spacer());
     }
     return menuItems;

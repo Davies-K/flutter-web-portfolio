@@ -114,6 +114,7 @@ class _AppDrawerState extends State<AppDrawer> {
     return menuItems;
   }
 
+// ontap nav item action
   _onTapNavItem({
     required GlobalKey context,
     required String navItemName,

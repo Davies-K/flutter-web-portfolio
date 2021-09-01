@@ -1,15 +1,18 @@
+import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/Constants/data.dart';
 import 'package:portfolio/presentation/pages/sections/nav_section/nav_section_web.dart';
 import 'package:portfolio/values/values.dart';
 import 'package:portfolio/widgets/app_drawer.dart';
+import 'package:portfolio/widgets/footer.dart';
 import 'package:portfolio/widgets/image_container.dart';
 import 'package:portfolio/widgets/job_descripton.dart';
 import 'package:portfolio/widgets/nav_item.dart';
 import 'package:portfolio/widgets/rounded_button.dart';
 import 'package:portfolio/widgets/skill_text_item.dart';
 import 'package:portfolio/widgets/social_icons_container.dart';
+import 'package:portfolio/widgets/source_project.dart';
 import 'package:portfolio/widgets/tech_stack_container.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:layout/layout.dart';
@@ -443,7 +446,108 @@ class _HomePageState extends State<HomePage> {
                                 ]),
                               ],
                             ))
-                      ]))
+                      ])),
+
+                  maxVerticalSpacing(),
+                  //open-sourced project
+                  Container(
+                      width: 1000,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Works I have done, ",
+                                style: GoogleFonts.lato(
+                                    fontWeight: FontWeight.bold, fontSize: 40)),
+                            Row(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text("open-sourced ",
+                                        style: GoogleFonts.lato(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 40)),
+                                    CustomUnderlined(
+                                        fontSize: 40,
+                                        label: "projects",
+                                        color: Color(0xFFEFCFB4)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Row(children: [
+                              //first column
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(height: 30),
+                                    SourceProject(
+                                      label: "Taskez",
+                                      description:
+                                          "We helped Vencortex in redesigning a whole new customer experience",
+                                    )
+                                  ]),
+                              SizedBox(width: 10),
+                              //second column
+                              Column(children: []),
+                            ])
+                          ])),
+                  Container(
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height,
+                      child: Stack(children: [
+                        Positioned(
+                            right: MediaQuery.of(context).size.width * 0.6,
+                            child: Transform.scale(
+                                scale: 0.8,
+                                child: DrawnCircle(
+                                  color: Color(0xFFEFCFB4),
+                                ))),
+                        Positioned(
+                            top: 50,
+                            left: MediaQuery.of(context).size.width * 0.6,
+                            child: Transform.scale(
+                                scale: 0.6,
+                                child: DrawnCircle(
+                                  color: Color(0xFFEFCFB4),
+                                ))),
+                        Center(
+                            child: Container(
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                        "Let me know if you want to talk about a potential collaboration. I'm available for freelance work",
+                                        textAlign: TextAlign.start,
+                                        style: GoogleFonts.montserrat(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 40)),
+                                    SizedBox(height: 40),
+                                    Row(
+                                      children: [
+                                        Text("Let's build your app   ",
+                                            style: GoogleFonts.montserrat(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                color: Color(0xFFEFCFB4),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 40)),
+                                        Icon(
+                                          FeatherIcons.arrowUpRight,
+                                          size: 40,
+                                          color: Color(0xFFEFCFB4),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                )))
+                      ])),
+
+                  maxVerticalSpacing(),
+                  Container(
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      child: Footer())
                 ],
               ),
             ),
@@ -490,9 +594,11 @@ class ServiceContainer extends StatelessWidget {
 
 class DrawnCircle extends StatelessWidget {
   final double? size;
+  final Color? color;
   const DrawnCircle({
     Key? key,
     this.size,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -502,7 +608,7 @@ class DrawnCircle extends StatelessWidget {
         height: size ?? 1000,
         decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(width: 1, color: Color(0xFFE5E6EB))));
+            border: Border.all(width: 1, color: color ?? Color(0xFFE5E6EB))));
   }
 }
 

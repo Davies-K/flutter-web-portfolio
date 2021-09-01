@@ -1,6 +1,9 @@
 part of values;
 
 class StringConst {
+  //new
+  static const String DEVELOPER_EMAIL = "john.daves13@gmail.com";
+
   //strings
   static const String APP_NAME = "Jade Macy Portfolio";
 

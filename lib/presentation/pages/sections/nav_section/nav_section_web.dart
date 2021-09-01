@@ -6,6 +6,7 @@ import 'package:portfolio/utils/app_utils.dart';
 import 'package:portfolio/values/spaces.dart';
 import 'package:portfolio/values/values.dart';
 import 'package:portfolio/widgets/content_area.dart';
+import 'package:portfolio/widgets/email_widget.dart';
 import 'package:portfolio/widgets/nav_item.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:layout/layout.dart';
@@ -41,26 +42,7 @@ class _NavSectionWebState extends State<NavSectionWeb> {
                 flex: 1,
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: [
-                      Container(
-                          //alignment: Alignment.centerLeft,
-                          width: 30,
-                          height: 30,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                  width: 1, color: Colors.grey[400]!)),
-                          child: Center(
-                              child: Icon(
-                            FeatherIcons.mail,
-                            size: 15,
-                          ))),
-                      SizedBox(width: 10),
-                      Text("john.daves13@gmail.com",
-                          style: GoogleFonts.lato(fontWeight: FontWeight.bold))
-                    ],
-                  ),
+                  child: EmailWidget(),
                 ),
               ),
               Expanded(

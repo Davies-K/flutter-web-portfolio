@@ -39,6 +39,7 @@ class NavSectionMobile extends StatelessWidget {
                     if (scaffoldKey.currentState!.isEndDrawerOpen) {
                       scaffoldKey.currentState?.openEndDrawer();
                     } else {
+                      //open menu
                       scaffoldKey.currentState?.openDrawer();
                     }
                   },

@@ -11,17 +11,20 @@ class SourceProject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-            height: MediaQuery.of(context).size.height * 0.5,
-            width: 300,
-            color: Colors.black),
-        SizedBox(height: 30),
-        Text(label, style: GoogleFonts.lato(fontWeight: FontWeight.bold)),
-        Text(description, style: GoogleFonts.lato())
-      ],
+    return Container(
+      width: 400,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              height: MediaQuery.of(context).size.height * 0.5,
+              width: 400,
+              color: Colors.black),
+          SizedBox(height: 30),
+          Text(label, style: GoogleFonts.lato(fontWeight: FontWeight.bold)),
+          Text(description, style: GoogleFonts.lato())
+        ],
+      ),
     );
   }
 }

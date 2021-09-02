@@ -484,11 +484,33 @@ class _HomePageState extends State<HomePage> {
                                       label: "Taskez",
                                       description:
                                           "We helped Vencortex in redesigning a whole new customer experience",
+                                    ),
+                                    SizedBox(height: 30),
+                                    SourceProject(
+                                      label: "Taskez",
+                                      description:
+                                          "We helped Vencortex in redesigning a whole new customer experience",
                                     )
                                   ]),
-                              SizedBox(width: 10),
+                              SizedBox(width: 50),
                               //second column
-                              Column(children: []),
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(height: 200),
+                                    SizedBox(height: 30),
+                                    SourceProject(
+                                      label: "Taskez",
+                                      description:
+                                          "We helped Vencortex in redesigning a whole new customer experience",
+                                    ),
+                                    SizedBox(height: 30),
+                                    SourceProject(
+                                      label: "Taskez",
+                                      description:
+                                          "We helped Vencortex in redesigning a whole new customer experience",
+                                    )
+                                  ]),
                             ])
                           ])),
                   Container(

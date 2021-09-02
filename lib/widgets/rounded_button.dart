@@ -5,12 +5,14 @@ class RoundedButton extends StatelessWidget {
   final String label;
   final double? width;
   final double? height;
+  final BorderRadius? borderRadius;
   final TextStyle? textStyle;
   final VoidCallback? callback;
   const RoundedButton({
     Key? key,
     required this.label,
     this.callback,
+    this.borderRadius,
     this.width,
     this.height,
     this.textStyle,
@@ -28,7 +30,7 @@ class RoundedButton extends StatelessWidget {
                   MaterialStateProperty.all<Color>(Color(0xFF000000)),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0),
+                      borderRadius: borderRadius ?? BorderRadius.circular(50.0),
                       side: BorderSide(color: Color(0xFF000000))))),
           child: Text(label,
               style: textStyle ??

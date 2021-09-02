@@ -64,6 +64,7 @@ class _HomePageState extends State<HomePage> {
       NavItemData(name: StringConst.CONTACT, key: GlobalKey()),
     ];
     return Scaffold(
+        key: _scaffoldKey,
         drawer: ResponsiveBuilder(
           refinedBreakpoints: RefinedBreakpoints(),
           builder: (context, sizingInformation) {
@@ -601,9 +602,9 @@ class _HomePageState extends State<HomePage> {
                             ])),
 
                         maxVerticalSpacing(),
-                        Container(
-                            width: MediaQuery.of(context).size.width * 0.85,
-                            child: Footer())
+                        // Container(
+                        //     width: MediaQuery.of(context).size.width * 0.85,
+                        //     child: Footer())
                       ],
                     ),
                   ),

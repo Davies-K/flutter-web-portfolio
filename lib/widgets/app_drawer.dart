@@ -5,8 +5,11 @@ import 'package:portfolio/presentation/layout/adaptive.dart';
 import 'package:portfolio/utils/app_utils.dart';
 import 'package:portfolio/values/spaces.dart';
 import 'package:portfolio/values/values.dart';
-
+import 'package:layout/layout.dart';
+import 'package:portfolio/widgets/rounded_button.dart';
+import 'package:portfolio/widgets/social_icons_container.dart';
 import 'creators.dart';
+import 'image_container.dart';
 import 'nav_item.dart';
 import 'social_icons.dart';
 
@@ -30,59 +33,62 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
+  Widget maxVerticalSpacing() {
+    double height = context.layout.value(
+      xs: Sizes.HEIGHT_24,
+      sm: Sizes.HEIGHT_24,
+      md: Sizes.HEIGHT_40,
+      lg: Sizes.HEIGHT_40,
+      xl: Sizes.HEIGHT_40,
+    );
+    return SizedBox(height: 2 * height);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width ?? assignWidth(context, 0.85),
+      width: widthOfScreen(context) * 0.75,
       child: Drawer(
-        child: Container(
-          color: widget.color,
-          child: Column(
-            children: [
-              SpaceH16(),
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    onTap: widget.onClose ?? () => _closeDrawer(),
-                  ),
-                ),
-              ),
-              Spacer(),
-              ..._buildMenuList(
-                context: context,
-                menuList: widget.menuList,
-              ),
-              Spacer(),
-              SocialIcons(
-                icons: [
-                  FontAwesomeIcons.linkedin,
-                  FontAwesomeIcons.github,
-                  FontAwesomeIcons.twitter,
-                ],
-                iconColor: Colors.white,
-                socialLinks: [
-                  StringConst.LINKED_IN_URL,
-                  StringConst.GITHUB_URL,
-                  StringConst.TWITTER_URL,
-                ],
-                spacing: kSpacing20,
-              ),
-              SpaceH24(),
-              Creators(
-                hasRightsText: false,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                builtInfoMainAxisAlignment: MainAxisAlignment.center,
-                locationMainAxisAlignment: MainAxisAlignment.center,
-                doesBuiltInfoComesFirst: false,
-              ),
-              SpaceH24(),
-            ],
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Align(
+          alignment: Alignment.topRight,
+          child: Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.close, color: Colors.black)),
           ),
         ),
-      ),
+        maxVerticalSpacing(),
+        Padding(
+            padding: EdgeInsets.only(left: 20, bottom: 40),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              ..._buildMenuList(context: context, menuList: widget.menuList),
+            ])),
+        Container(width: double.infinity, child: SocialIconsContainer()),
+        SizedBox(height: 20),
+        Align(
+          alignment: Alignment.center,
+          child: ProfileImageContainer(
+            color: Colors.white,
+            imageUrl: 'assets/images/8.png',
+            scale: 1.0,
+          ),
+        ),
+        Expanded(
+            child: Align(
+          alignment: Alignment.bottomCenter,
+          child: RoundedButton(
+              borderRadius: BorderRadius.circular(0.0),
+              width: double.infinity,
+              label: "Connect with Me",
+              height: 80),
+        ))
+      ])),
     );
   }
 
@@ -99,7 +105,7 @@ class _AppDrawerState extends State<AppDrawer> {
             context: menuList[i].key,
             navItemName: menuList[i].name,
           ),
-          title: menuList[i].name,
+          title: menuList[i].name.toLowerCase(),
           isSelected: menuList[i].isSelected,
           titleStyle: textTheme.bodyText1?.copyWith(
             color: menuList[i].isSelected ? Colors.black : Colors.black,
@@ -110,7 +116,7 @@ class _AppDrawerState extends State<AppDrawer> {
         ),
       );
       // add spacer
-      menuItems.add(Spacer());
+      menuItems.add(SpaceH16());
     }
     return menuItems;
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/values/values.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const kDuration = Duration(milliseconds: 600);

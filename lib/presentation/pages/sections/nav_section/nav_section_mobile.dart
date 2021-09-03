@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/presentation/layout/adaptive.dart';
 import 'package:portfolio/values/spaces.dart';
 import 'package:portfolio/values/values.dart';
@@ -28,7 +29,10 @@ class NavSectionMobile extends StatelessWidget {
         ),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          AppLogo(),
+          // AppLogo(),
+          Text('Kwarteng',
+              style: GoogleFonts.greatVibes(
+                  fontSize: 30, fontWeight: FontWeight.bold)),
           IconButton(
             icon: Icon(
               Icons.menu,

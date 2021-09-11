@@ -97,7 +97,7 @@ class _HeaderSectionState extends State<HeaderSection> {
                 TechStackContainer(label: "stack"),
                 TechStackContainer(label: "evelead")
               ])
-            : Wrap(children: [
+            : Wrap(alignment: WrapAlignment.center, children: [
                 TechStackContainer(label: "Google"),
                 TechStackContainer(label: "uber"),
                 TechStackContainer(label: "stack"),

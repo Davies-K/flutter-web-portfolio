@@ -2,7 +2,9 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/Constants/data.dart';
+import 'package:portfolio/presentation/pages/sections/help_address_section.dart';
 import 'package:portfolio/presentation/pages/sections/nav_section/nav_section_web.dart';
+import 'package:portfolio/presentation/pages/sections/resume_section.dart';
 import 'package:portfolio/values/values.dart';
 import 'package:portfolio/widgets/app_drawer.dart';
 import 'package:portfolio/widgets/footer.dart';
@@ -18,6 +20,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:layout/layout.dart';
 import 'sections/header_section.dart';
 import 'sections/nav_section/nav_section_mobile.dart';
+import 'sections/services_section.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -111,241 +114,9 @@ class _HomePageState extends State<HomePage> {
                       // maxVerticalSpacing(),
                       HeaderSection(),
                       maxVerticalSpacing(),
-                      Container(
-                        height: 600,
-                        child: Stack(
-                          children: [
-                            Align(
-                              alignment: Alignment.center,
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: 1000,
-                                height: 600,
-                                //padding: EdgeInsets.all(50),
-                                color: Color(0xFFF4F5FC),
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      right: 600,
-                                      child: DrawnCircle(),
-                                    ),
-                                    Positioned(
-                                      left: 600,
-                                      bottom: 5,
-                                      child: DrawnCircle(),
-                                    ),
-                                    Positioned(
-                                      top: 20,
-                                      right: 50,
-                                      left: 50,
-                                      child: CustomUnderlined(
-                                          fontSize: 30,
-                                          label: "Services",
-                                          color: Color(0xFFB5C0FD)),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ServiceContainer(),
-                                    ServiceContainer(),
-                                    ServiceContainer()
-                                  ]),
-                            )
-                          ],
-                        ),
-                      ),
+                      ServicesSection(),
                       maxVerticalSpacing(),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Container(
-                            width: 1000,
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomUnderlined(
-                                      fontSize: 40,
-                                      label: "Resume",
-                                      color: Color(0xFFD9DEFD)),
-                                  maxVerticalSpacing(),
-                                  Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          flex: 1,
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                buildUnderlinedText(
-                                                    "Experience",
-                                                    GoogleFonts.lato(
-                                                        color:
-                                                            Color(0xFFD4EBEB),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 30)),
-                                                SizedBox(height: 40),
-                                                JobDescriptionItem(
-                                                  company: 'Uber',
-                                                  team: 'Product Designer',
-                                                  timeSpan:
-                                                      'December 2019 - Current',
-                                                ),
-                                                SizedBox(height: 40),
-                                                JobDescriptionItem(
-                                                  company: 'Apple',
-                                                  team: 'Product Designer',
-                                                  timeSpan:
-                                                      'December 2019 - Current',
-                                                )
-                                              ]),
-                                        ),
-                                        //SizedBox(width: 200),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                buildUnderlinedText(
-                                                    "Education",
-                                                    GoogleFonts.lato(
-                                                        color:
-                                                            Color(0xFFFEE1D9),
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 30)),
-                                                SizedBox(height: 40),
-                                                JobDescriptionItem(
-                                                  company:
-                                                      'SUNY Politechnic Institute',
-                                                  team:
-                                                      'MSc. Information Design & Technology',
-                                                  timeSpan:
-                                                      'December 2019 - Current',
-                                                ),
-                                                SizedBox(height: 40),
-                                                JobDescriptionItem(
-                                                  company:
-                                                      'Florida Gulf Coast University',
-                                                  team: 'Product Designer',
-                                                  timeSpan:
-                                                      'December 2019 - Current',
-                                                )
-                                              ]),
-                                        )
-                                      ]),
-                                  maxVerticalSpacing(),
-                                  Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          flex: 1,
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CustomUnderlined(
-                                                    fontSize: 30,
-                                                    label: "Skills",
-                                                    color: Color(0xFFD4EBEB)),
-                                                SizedBox(height: 40),
-                                                Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      Expanded(
-                                                          flex: 1,
-                                                          child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                TitleItem(
-                                                                  company:
-                                                                      "Design",
-                                                                ),
-                                                                SizedBox(
-                                                                    height: 10),
-                                                                ...List.generate(
-                                                                    AppData
-                                                                        .designSkills
-                                                                        .length,
-                                                                    (index) => SkillTextItem(
-                                                                        label: AppData
-                                                                            .designSkills[index]))
-                                                              ])),
-                                                      Expanded(
-                                                          flex: 1,
-                                                          child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                TitleItem(
-                                                                  company:
-                                                                      "Development",
-                                                                ),
-                                                                SizedBox(
-                                                                    height: 10),
-                                                                ...List.generate(
-                                                                    AppData
-                                                                        .designSkills
-                                                                        .length,
-                                                                    (index) => SkillTextItem(
-                                                                        label: AppData
-                                                                            .designSkills[index]))
-                                                              ]))
-                                                    ]),
-                                              ]),
-                                        ),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CustomUnderlined(
-                                                    fontSize: 30,
-                                                    label: "Courses",
-                                                    color: Color(0xFFFEE1D9)),
-                                                SizedBox(height: 40),
-                                                JobDescriptionItem(
-                                                  company:
-                                                      'SUNY Politechnic Institute',
-                                                  team:
-                                                      'MSc. Information Design & Technology',
-                                                  timeSpan:
-                                                      'December 2019 - Current',
-                                                ),
-                                                SizedBox(height: 40),
-                                                JobDescriptionItem(
-                                                  company:
-                                                      'Florida Gulf Coast University',
-                                                  team: 'Product Designer',
-                                                  timeSpan:
-                                                      'December 2019 - Current',
-                                                )
-                                              ]),
-                                        )
-                                      ])
-                                ])),
-                      ),
+                      ResumeSection(),
                       maxVerticalSpacing(),
                       //ShowCase
                       Container(
@@ -487,61 +258,7 @@ class _HomePageState extends State<HomePage> {
                                       ]),
                                 ])
                               ])),
-                      Container(
-                          width: double.infinity,
-                          height: MediaQuery.of(context).size.height,
-                          child: Stack(children: [
-                            Positioned(
-                                right: MediaQuery.of(context).size.width * 0.6,
-                                child: Transform.scale(
-                                    scale: 0.8,
-                                    child: DrawnCircle(
-                                      color: Color(0xFFEFCFB4),
-                                    ))),
-                            Positioned(
-                                top: 50,
-                                left: MediaQuery.of(context).size.width * 0.6,
-                                child: Transform.scale(
-                                    scale: 0.6,
-                                    child: DrawnCircle(
-                                      color: Color(0xFFEFCFB4),
-                                    ))),
-                            Center(
-                                child: Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.35,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                            "Let me know if you want to talk about a potential collaboration. I'm available for freelance work",
-                                            textAlign: TextAlign.start,
-                                            style: GoogleFonts.montserrat(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 40)),
-                                        SizedBox(height: 40),
-                                        Row(
-                                          children: [
-                                            Text("Let's build your app   ",
-                                                style: GoogleFonts.montserrat(
-                                                    decoration: TextDecoration
-                                                        .underline,
-                                                    color: Color(0xFFEFCFB4),
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 40)),
-                                            Icon(
-                                              FeatherIcons.arrowUpRight,
-                                              size: 40,
-                                              color: Color(0xFFEFCFB4),
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    )))
-                          ])),
+                      HelpAddressSection(),
 
                       maxVerticalSpacing(),
                       Container(
@@ -610,7 +327,7 @@ class ServiceContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         width: 350,
         height: 350,
         color: Colors.white);

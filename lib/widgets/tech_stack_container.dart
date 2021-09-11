@@ -8,8 +8,8 @@ class TechStackContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        constraints: BoxConstraints(minWidth: 200),
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+        constraints: BoxConstraints(minWidth: 150),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         width: 10,
         margin: EdgeInsets.only(right: 20, bottom: 20),
         decoration: BoxDecoration(

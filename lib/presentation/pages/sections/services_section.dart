@@ -4,6 +4,8 @@ import 'package:portfolio/presentation/layout/adaptive.dart';
 import '../home_page.dart';
 
 class ServicesSection extends StatefulWidget {
+  ServicesSection({Key? key}) : super(key: key);
+
   @override
   _ServicesSectionState createState() => _ServicesSectionState();
 }
@@ -14,6 +16,7 @@ class _ServicesSectionState extends State<ServicesSection> {
     return Transform.scale(
       scale: (displayTypeOf(context) == DisplayType.desktop) ? 1 : 0.8,
       child: Container(
+        key: widget.key!,
         height: 600,
         child: Stack(
           children: [

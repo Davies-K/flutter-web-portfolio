@@ -63,7 +63,8 @@ class _HomePageState extends State<HomePage> {
     final ScrollController _scrollController = ScrollController();
 
     final List<NavItemData> navItems = [
-      NavItemData(name: StringConst.PORTFOLIO, key: GlobalKey()),
+      NavItemData(
+          name: StringConst.PORTFOLIO, key: GlobalKey(), isSelected: true),
       NavItemData(name: StringConst.SERVICES, key: GlobalKey()),
       NavItemData(name: StringConst.RESUME, key: GlobalKey()),
       NavItemData(name: StringConst.CONTACT, key: GlobalKey()),
@@ -110,12 +111,15 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: SingleChildScrollView(
+                  controller: _scrollController,
                   child: Column(
                     children: [
                       // maxVerticalSpacing(),
                       HeaderSection(),
                       maxVerticalSpacing(),
-                      ServicesSection(),
+                      ServicesSection(
+                        key: navItems[1].key,
+                      ),
                       maxVerticalSpacing(),
                       ResumeSection(),
                       maxVerticalSpacing(),

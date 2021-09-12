@@ -138,9 +138,12 @@ class _HomePageState extends State<HomePage> {
                           //  height: MediaQuery.of(context).size.height,
                           child: (displayTypeOf(context) == DisplayType.desktop)
                               ? Row(children: [
-                                  _taskezWriteUp(
-                                      "This was my first Flutter project in production. Your best friend for generating designs from templates with your photos. And oh, it comes with a feature that allows you draw, overlay text and frames in a story-ish format."),
-                                  taskezImage()
+                                  Expanded(
+                                    flex: 1,
+                                    child: _taskezWriteUp(
+                                        "This was my first Flutter project in production. Your best friend for generating designs from templates with your photos. And oh, it comes with a feature that allows you draw, overlay text and frames in a story-ish format."),
+                                  ),
+                                  Expanded(flex: 1, child: taskezImage())
                                 ])
                               : Column(
                                   children: [
@@ -240,62 +243,58 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Expanded _taskezWriteUp(String text) {
-    return Expanded(
-        flex: 1,
-        child: Container(
-            alignment: Alignment.center,
-            child: Center(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Taskez",
-                        style: GoogleFonts.raleway(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        )),
-                    SizedBox(height: 20),
-                    Text(text,
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.lato(
-                          fontSize: 16,
-                        )),
-                    SizedBox(height: 20),
-                    Image(
-                        image: AssetImage(
-                          "assets/images/play-store.png",
-                        ),
-                        width: 200,
-                        height: 80)
-                  ]),
-            )));
+  Container _taskezWriteUp(String text) {
+    return Container(
+        alignment: Alignment.center,
+        child: Center(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Taskez",
+                    style: GoogleFonts.raleway(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    )),
+                SizedBox(height: 20),
+                Text(text,
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.lato(
+                      fontSize: 16,
+                    )),
+                SizedBox(height: 20),
+                Image(
+                    image: AssetImage(
+                      "assets/images/play-store.png",
+                    ),
+                    width: 200,
+                    height: 80)
+              ]),
+        ));
   }
 
-  Expanded taskezImage() {
-    return Expanded(
-        flex: 1,
-        child: Column(
-          children: [
-            maxVerticalSpacing(),
-            Stack(children: [
-              Transform.scale(scale: 0.8, child: DrawnCircle()),
-              Positioned(
-                  top: 400,
-                  left: 50,
-                  child: Container(
-                      width: 400,
-                      height: 400,
-                      decoration: BoxDecoration(
-                          color: Color(0xFFE9FAFB), shape: BoxShape.circle))),
-              Image(
-                fit: BoxFit.fitHeight,
-                height: MediaQuery.of(context).size.height * 0.8,
-                image: AssetImage("assets/images/phone_screenshot.png"),
-              )
-            ]),
-          ],
-        ));
+  Column taskezImage() {
+    return Column(
+      children: [
+        maxVerticalSpacing(),
+        Stack(children: [
+          Transform.scale(scale: 0.8, child: DrawnCircle()),
+          Positioned(
+              top: 400,
+              left: 50,
+              child: Container(
+                  width: 400,
+                  height: 400,
+                  decoration: BoxDecoration(
+                      color: Color(0xFFE9FAFB), shape: BoxShape.circle))),
+          Image(
+            fit: BoxFit.fitHeight,
+            height: MediaQuery.of(context).size.height * 0.8,
+            image: AssetImage("assets/images/phone_screenshot.png"),
+          )
+        ]),
+      ],
+    );
   }
 
   buildUnderlinedText(String text, TextStyle style) {

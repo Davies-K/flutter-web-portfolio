@@ -67,9 +67,9 @@ class ResumeSection extends StatelessWidget {
                           Expanded(flex: 1, child: educationColumn())
                         ])
                   : Wrap(children: [
-                      Expanded(flex: 1, child: experienceColumn()),
+                      experienceColumn(),
                       //SizedBox(width: 200),
-                      Expanded(flex: 1, child: educationColumn())
+                      educationColumn()
                     ]),
               maxVerticalSpacing(),
               (displayTypeOf(context) == DisplayType.desktop)
@@ -80,10 +80,7 @@ class ResumeSection extends StatelessWidget {
                           Expanded(flex: 1, child: skillsColumn(context)),
                           Expanded(flex: 1, child: coursesColumn())
                         ])
-                  : Wrap(children: [
-                      Expanded(flex: 1, child: skillsColumn(context)),
-                      Expanded(flex: 1, child: coursesColumn())
-                    ])
+                  : Wrap(children: [skillsColumn(context), coursesColumn()])
             ])),
       ),
     );

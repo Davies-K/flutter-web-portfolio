@@ -75,7 +75,7 @@ class _AppDrawerState extends State<AppDrawer> {
           alignment: Alignment.center,
           child: ProfileImageContainer(
             color: Colors.white,
-            imageUrl: 'assets/images/8.png',
+            imageUrl: 'assets/images/memoji-5.png',
             scale: 1.0,
           ),
         ),

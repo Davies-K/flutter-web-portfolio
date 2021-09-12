@@ -21,7 +21,8 @@ class _ServicesSectionState extends State<ServicesSection> {
               alignment: Alignment.center,
               child: Container(
                 alignment: Alignment.center,
-                width: (displayTypeOf(context) == DisplayType.desktop)
+                width: (displayTypeOf(context) == DisplayType.desktop &&
+                        !isDisplaySmallDesktopOrIpadPro(context))
                     ? 1000
                     : double.infinity,
                 height: 600,

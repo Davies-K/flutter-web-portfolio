@@ -262,7 +262,7 @@ class _HomePageState extends State<HomePage> {
 
                       maxVerticalSpacing(),
                       Container(
-                          //height: double.infinity,
+                          height: 100,
                           width: MediaQuery.of(context).size.width * 0.85,
                           child: Footer())
                     ],

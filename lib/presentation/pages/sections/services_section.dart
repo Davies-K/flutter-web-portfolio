@@ -23,7 +23,7 @@ class _ServicesSectionState extends State<ServicesSection> {
                 alignment: Alignment.center,
                 width: (displayTypeOf(context) == DisplayType.desktop)
                     ? 1000
-                    : 800,
+                    : double.infinity,
                 height: 600,
                 //padding: EdgeInsets.all(50),
                 color: Color(0xFFF4F5FC),
@@ -52,7 +52,8 @@ class _ServicesSectionState extends State<ServicesSection> {
               ),
             ),
             Center(
-              child: (displayTypeOf(context) == DisplayType.desktop)
+              child: (displayTypeOf(context) == DisplayType.desktop &&
+                      !isDisplaySmallDesktopOrIpadPro(context))
                   ? Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,

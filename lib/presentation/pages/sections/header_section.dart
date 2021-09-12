@@ -38,7 +38,6 @@ class _HeaderSectionState extends State<HeaderSection> {
       lg: Sizes.WIDTH_200,
       xl: Sizes.WIDTH_200,
     );
-
     return width;
   }
 

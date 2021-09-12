@@ -11,7 +11,7 @@ class HelpAddressSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.scale(
-      scale: (displayTypeOf(context) == DisplayType.desktop) ? 1 : 0.65,
+      scale: (displayTypeOf(context) == DisplayType.desktop) ? 1 : 0.85,
       child: Container(
           width: double.infinity,
           height: MediaQuery.of(context).size.height,
@@ -56,10 +56,10 @@ class HelpAddressSection extends StatelessWidget {
                                     fontSize: (displayTypeOf(context) ==
                                             DisplayType.desktop)
                                         ? 40
-                                        : 35)),
+                                        : 30)),
                             Icon(
                               FeatherIcons.arrowUpRight,
-                              size: 40,
+                              size: 35,
                               color: Color(0xFFEFCFB4),
                             )
                           ],

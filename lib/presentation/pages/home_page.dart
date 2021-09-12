@@ -2,6 +2,7 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/Constants/data.dart';
+import 'package:portfolio/presentation/layout/adaptive.dart';
 import 'package:portfolio/presentation/pages/sections/help_address_section.dart';
 import 'package:portfolio/presentation/pages/sections/nav_section/nav_section_web.dart';
 import 'package:portfolio/presentation/pages/sections/resume_section.dart';
@@ -33,8 +34,8 @@ class _HomePageState extends State<HomePage> {
   Offset pointer = Offset(300, 300);
   Widget maxVerticalSpacing() {
     double height = context.layout.value(
-      xs: Sizes.HEIGHT_24,
-      sm: Sizes.HEIGHT_24,
+      xs: Sizes.HEIGHT_16,
+      sm: Sizes.HEIGHT_16,
       md: Sizes.HEIGHT_40,
       lg: Sizes.HEIGHT_40,
       xl: Sizes.HEIGHT_40,
@@ -125,139 +126,38 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.black),
                       // maxVerticalSpacing(),
                       Container(
-                          width: 1100,
+                          //height: MediaQuery.of(context).size.height * 0.8,
+                          width: (displayTypeOf(context) == DisplayType.desktop)
+                              ? 1100
+                              : double.infinity,
+                          padding:
+                              (displayTypeOf(context) == DisplayType.desktop &&
+                                      !isDisplaySmallDesktopOrIpadPro(context))
+                                  ? EdgeInsets.all(0)
+                                  : EdgeInsets.only(left: 10, right: 10),
                           //  height: MediaQuery.of(context).size.height,
-                          child: Row(children: [
-                            Expanded(
-                                flex: 1,
-                                child: Container(
-                                    alignment: Alignment.center,
-                                    child: Center(
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text("Taskez",
-                                                style: GoogleFonts.raleway(
-                                                  fontSize: 30,
-                                                  fontWeight: FontWeight.bold,
-                                                )),
-                                            SizedBox(height: 20),
-                                            Text(
-                                                "This was my first Flutter project in production. Your best \nfriend for generating designs from templates with your \nphotos. And oh, it comes with a feature that allows you \ndraw, overlay text and frames in a story-ish format.",
-                                                textAlign: TextAlign.left,
-                                                style: GoogleFonts.lato(
-                                                  fontSize: 16,
-                                                )),
-                                            SizedBox(height: 20),
-                                            Image(
-                                                image: AssetImage(
-                                                  "assets/images/play-store.png",
-                                                ),
-                                                width: 200,
-                                                height: 80)
-                                          ]),
-                                    ))),
-                            Expanded(
-                                flex: 1,
-                                child: Column(
+                          child: (displayTypeOf(context) == DisplayType.desktop)
+                              ? Row(children: [
+                                  _taskezWriteUp(
+                                      "This was my first Flutter project in production. Your best friend for generating designs from templates with your photos. And oh, it comes with a feature that allows you draw, overlay text and frames in a story-ish format."),
+                                  taskezImage()
+                                ])
+                              : Column(
                                   children: [
                                     maxVerticalSpacing(),
-                                    Stack(children: [
-                                      Transform.scale(
-                                          scale: 0.8, child: DrawnCircle()),
-                                      Positioned(
-                                          top: 400,
-                                          left: 50,
-                                          child: Container(
-                                              width: 400,
-                                              height: 400,
-                                              decoration: BoxDecoration(
-                                                  color: Color(0xFFE9FAFB),
-                                                  shape: BoxShape.circle))),
-                                      Image(
-                                        fit: BoxFit.fitHeight,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.8,
-                                        image: AssetImage(
-                                            "assets/images/phone_screenshot.png"),
-                                      )
-                                    ]),
+                                    Wrap(
+                                        alignment: WrapAlignment.center,
+                                        children: [
+                                          _taskezWriteUp(
+                                              "This was my first Flutter project in production. Your best friend for generating designs from templates with your photos. And oh, it comes with a feature that allows you draw, overlay text and frames in a story-ish format."),
+                                          taskezImage()
+                                        ]),
                                   ],
-                                ))
-                          ])),
+                                )),
 
-                      maxVerticalSpacing(),
+                      // maxVerticalSpacing(),
                       //open-sourced project
-                      Container(
-                          width: 1000,
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Works I have done, ",
-                                    style: GoogleFonts.lato(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 40)),
-                                Row(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text("open-sourced ",
-                                            style: GoogleFonts.lato(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 40)),
-                                        CustomUnderlined(
-                                            fontSize: 40,
-                                            label: "projects",
-                                            color: Color(0xFFEFCFB4)),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Row(children: [
-                                  //first column
-                                  Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(height: 30),
-                                        SourceProject(
-                                          label: "Taskez",
-                                          description:
-                                              "We helped Vencortex in redesigning a whole new customer experience",
-                                        ),
-                                        SizedBox(height: 30),
-                                        SourceProject(
-                                          label: "Taskez",
-                                          description:
-                                              "We helped Vencortex in redesigning a whole new customer experience",
-                                        )
-                                      ]),
-                                  SizedBox(width: 50),
-                                  //second column
-                                  Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(height: 200),
-                                        SizedBox(height: 30),
-                                        SourceProject(
-                                          label: "Taskez",
-                                          description:
-                                              "We helped Vencortex in redesigning a whole new customer experience",
-                                        ),
-                                        SizedBox(height: 30),
-                                        SourceProject(
-                                          label: "Taskez",
-                                          description:
-                                              "We helped Vencortex in redesigning a whole new customer experience",
-                                        )
-                                      ]),
-                                ])
-                              ])),
+                      buildWorkDoneSection(),
                       HelpAddressSection(),
 
                       maxVerticalSpacing(),
@@ -296,7 +196,107 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  _buildHeaderSection(context) {}
+  Transform buildWorkDoneSection() {
+    return Transform.scale(
+      scale: (displayTypeOf(context) == DisplayType.desktop) ? 1 : 0.8,
+      child: Container(
+          // margin:
+          //     (displayTypeOf(context) == DisplayType.desktop)
+          //         ? EdgeInsets.all(0)
+          //         : EdgeInsets.only(top: 20),
+          width: (displayTypeOf(context) == DisplayType.desktop)
+              ? 1000
+              : double.infinity,
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text("Works I have done, ",
+                style: GoogleFonts.lato(
+                    fontWeight: FontWeight.bold, fontSize: 30)),
+            Row(
+              children: [
+                Row(
+                  children: [
+                    Text("open-sourced ",
+                        style: GoogleFonts.lato(
+                            fontWeight: FontWeight.bold, fontSize: 30)),
+                    CustomUnderlined(
+                        fontSize: 30,
+                        label: "projects",
+                        color: Color(0xFFEFCFB4)),
+                  ],
+                ),
+              ],
+            ),
+            (displayTypeOf(context) == DisplayType.desktop)
+                ? Row(children: [
+                    //first column
+                    projectsLeftColumn(),
+                    SizedBox(width: 20),
+                    projectsRightColumn()
+                    //second column
+                  ])
+                : Wrap(children: [projectsLeftColumn(), projectsRightColumn()])
+          ])),
+    );
+  }
+
+  Expanded _taskezWriteUp(String text) {
+    return Expanded(
+        flex: 1,
+        child: Container(
+            alignment: Alignment.center,
+            child: Center(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Taskez",
+                        style: GoogleFonts.raleway(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    SizedBox(height: 20),
+                    Text(text,
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.lato(
+                          fontSize: 16,
+                        )),
+                    SizedBox(height: 20),
+                    Image(
+                        image: AssetImage(
+                          "assets/images/play-store.png",
+                        ),
+                        width: 200,
+                        height: 80)
+                  ]),
+            )));
+  }
+
+  Expanded taskezImage() {
+    return Expanded(
+        flex: 1,
+        child: Column(
+          children: [
+            maxVerticalSpacing(),
+            Stack(children: [
+              Transform.scale(scale: 0.8, child: DrawnCircle()),
+              Positioned(
+                  top: 400,
+                  left: 50,
+                  child: Container(
+                      width: 400,
+                      height: 400,
+                      decoration: BoxDecoration(
+                          color: Color(0xFFE9FAFB), shape: BoxShape.circle))),
+              Image(
+                fit: BoxFit.fitHeight,
+                height: MediaQuery.of(context).size.height * 0.8,
+                image: AssetImage("assets/images/phone_screenshot.png"),
+              )
+            ]),
+          ],
+        ));
+  }
 
   buildUnderlinedText(String text, TextStyle style) {
     final Size txtSize = _textSize(text, style);
@@ -307,6 +307,43 @@ class _HomePageState extends State<HomePage> {
         textWidth: txtSize.width * 1.5,
         color: style.color!,
         style: style);
+  }
+
+  Column projectsLeftColumn() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      SizedBox(height: 30),
+      SourceProject(
+        label: "Taskez",
+        description:
+            "We helped Vencortex in redesigning a whole new customer experience",
+      ),
+      SizedBox(height: 30),
+      SourceProject(
+        label: "Taskez",
+        description:
+            "We helped Vencortex in redesigning a whole new customer experience",
+      )
+    ]);
+  }
+
+  Column projectsRightColumn() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      (displayTypeOf(context) == DisplayType.desktop)
+          ? SizedBox(height: 200)
+          : SizedBox(height: 0),
+      SizedBox(height: 30),
+      SourceProject(
+        label: "Taskez",
+        description:
+            "We helped Vencortex in redesigning a whole new customer experience",
+      ),
+      SizedBox(height: 30),
+      SourceProject(
+        label: "Taskez",
+        description:
+            "We helped Vencortex in redesigning a whole new customer experience",
+      )
+    ]);
   }
 
   // Here it is!

@@ -16,15 +16,15 @@ class _FooterState extends State<Footer> {
     return Column(children: [
       Divider(),
       Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(10.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Icon(FeatherIcons.github),
-              SizedBox(width: 20),
+              SizedBox(width: 10),
               Icon(FeatherIcons.linkedin),
-              SizedBox(width: 20),
+              SizedBox(width: 10),
               Icon(FeatherIcons.twitter)
             ]),
 

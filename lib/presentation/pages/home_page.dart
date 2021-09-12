@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                       HeaderSection(),
                       maxVerticalSpacing(),
                       ServicesSection(
-                        key: navItems[1].key,
+                        containerKey: navItems[1].key,
                       ),
                       maxVerticalSpacing(),
                       ResumeSection(),

@@ -1,5 +1,2 @@
-# portfolio
-
-<p align="center">
-  <img src="lib/Screenshots/Screenshot(01).png" width="100%" title="homescreen1">
-</p>
+# Flutter Web Portfolio
+<h1 align="center">[https://davies-k.github.io/fendi](https://davies-k.github.io/flutter-web-portfolio/)</h2>

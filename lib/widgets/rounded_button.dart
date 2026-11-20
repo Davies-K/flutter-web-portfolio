@@ -1,43 +1,81 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/widgets/custom_cursor.dart';
 
 class RoundedButton extends StatelessWidget {
-  final String label;
-  final double? width;
-  final double? height;
-  final BorderRadius? borderRadius;
-  final TextStyle? textStyle;
-  final VoidCallback? callback;
   const RoundedButton({
-    Key? key,
+    super.key,
     required this.label,
-    this.callback,
+    required this.onTap,
+    this.width = 180,
+    this.height = 60,
     this.borderRadius,
-    this.width,
-    this.height,
-    this.textStyle,
-  }) : super(key: key);
+  });
+
+  final String label;
+  final VoidCallback onTap;
+  final double width;
+  final double height;
+  final BorderRadius? borderRadius;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width ?? 130,
-      height: height ?? 60,
-      child: ElevatedButton(
-          onPressed: callback,
-          style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(Color(0xFF000000)),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                      borderRadius: borderRadius ?? BorderRadius.circular(50.0),
-                      side: BorderSide(color: Color(0xFF000000))))),
-          child: Text(label,
-              style: textStyle ??
-                  GoogleFonts.lato(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white))),
+    return Clickable(
+      onTap: onTap,
+      semanticLabel: label,
+      builder: (context, hovered) => AnimatedScale(
+        scale: hovered ? 1.04 : 1,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeOut,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          width: width,
+          height: height,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: borderRadius ?? BorderRadius.circular(height / 2),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: hovered ? 0.25 : 0.0),
+                blurRadius: 24,
+                offset: const Offset(0, 10),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Flexible(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.fade,
+                  softWrap: false,
+                  style: GoogleFonts.lato(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                width: hovered ? 24 : 0,
+                child: ClipRect(
+                  child: hovered
+                      ? const Padding(
+                          padding: EdgeInsets.only(left: 8),
+                          child: Icon(Icons.arrow_forward,
+                              size: 16, color: Colors.white),
+                        )
+                      : null,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

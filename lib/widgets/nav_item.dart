@@ -1,51 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/values/values.dart';
-
-class NavItemData {
-  final String name;
-  final GlobalKey key;
-  bool isSelected;
-
-  NavItemData({
-    required this.name,
-    required this.key,
-    this.isSelected = false,
-  });
-}
+import 'package:portfolio/theme/app_theme.dart';
+import 'package:portfolio/widgets/custom_cursor.dart';
 
 class NavItem extends StatelessWidget {
-  NavItem({
+  const NavItem({
+    super.key,
     required this.title,
-    this.isSelected = false,
-    this.titleStyle,
-    this.textColor = Colors.black,
-    this.selectedColor = Colors.black,
-    this.onTap,
+    required this.selected,
+    required this.onTap,
+    this.style,
   });
 
   final String title;
-  bool isSelected;
-  final Color textColor;
-  final Color selectedColor;
-  final TextStyle? titleStyle;
-  final GestureTapCallback? onTap;
+  final bool selected;
+  final VoidCallback onTap;
+  final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
-    return InkWell(
+    return Clickable(
       onTap: onTap,
-      child: Container(
-        child: Text(
-          title,
-          style: titleStyle ??
-              textTheme.headline6?.copyWith(
-                color: isSelected ? selectedColor : textColor,
-                fontSize: Sizes.TEXT_SIZE_14,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+      semanticLabel: title,
+      builder: (context, hovered) {
+        final active = selected || hovered;
+        final base = style ?? AppText.nav(selected: selected);
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AnimatedDefaultTextStyle(
+              duration: const Duration(milliseconds: 200),
+              style: base.copyWith(color: active ? AppColors.ink : null),
+              child: Text(title),
+            ),
+            const SizedBox(height: 6),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOutCubic,
+              height: 2,
+              width: selected ? 18 : (hovered ? 8 : 0),
+              decoration: BoxDecoration(
+                color: AppColors.ink,
+                borderRadius: BorderRadius.circular(2),
               ),
-        ),
-      ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

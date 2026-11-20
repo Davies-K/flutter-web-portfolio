@@ -1,145 +1,90 @@
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:portfolio/presentation/layout/adaptive.dart';
-import 'package:portfolio/utils/app_utils.dart';
-import 'package:portfolio/values/spaces.dart';
-import 'package:portfolio/values/values.dart';
-import 'package:layout/layout.dart';
+import 'package:portfolio/data/portfolio_data.dart';
+import 'package:portfolio/theme/app_theme.dart';
+import 'package:portfolio/utils/url_utils.dart';
+import 'package:portfolio/widgets/custom_cursor.dart';
+import 'package:portfolio/widgets/nav_item.dart';
+import 'package:portfolio/widgets/profile_avatar.dart';
 import 'package:portfolio/widgets/rounded_button.dart';
-import 'package:portfolio/widgets/social_icons_container.dart';
-import 'creators.dart';
-import 'image_container.dart';
-import 'nav_item.dart';
-import 'social_icons.dart';
+import 'package:portfolio/widgets/social_icons_bar.dart';
 
-const kSpacing20 = Sizes.SIZE_20;
-
-class AppDrawer extends StatefulWidget {
-  final Color color;
-  final double? width;
-  final List<NavItemData> menuList;
-  final GestureTapCallback? onClose;
-
-  AppDrawer({
-    this.color = Colors.black,
-    this.width,
-    required this.menuList,
-    this.onClose,
+class AppDrawer extends StatelessWidget {
+  const AppDrawer({
+    super.key,
+    required this.items,
+    required this.selected,
+    required this.onSelect,
   });
 
-  @override
-  _AppDrawerState createState() => _AppDrawerState();
-}
-
-class _AppDrawerState extends State<AppDrawer> {
-  Widget maxVerticalSpacing() {
-    double height = context.layout.value(
-      xs: Sizes.HEIGHT_24,
-      sm: Sizes.HEIGHT_24,
-      md: Sizes.HEIGHT_40,
-      lg: Sizes.HEIGHT_40,
-      xl: Sizes.HEIGHT_40,
-    );
-    return SizedBox(height: 2 * height);
-  }
+  final List<String> items;
+  final int selected;
+  final ValueChanged<int> onSelect;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widthOfScreen(context) * 0.75,
-      child: Drawer(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Align(
-          alignment: Alignment.topRight,
-          child: Padding(
-            padding: EdgeInsets.only(right: 8.0),
-            child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.close, color: Colors.black)),
-          ),
-        ),
-        maxVerticalSpacing(),
-        Padding(
-            padding: EdgeInsets.only(left: 20, bottom: 40),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              ..._buildMenuList(context: context, menuList: widget.menuList),
-            ])),
-        Container(width: double.infinity, child: SocialIconsContainer()),
-        SizedBox(height: 20),
-        Align(
-          alignment: Alignment.center,
-          child: ProfileImageContainer(
-            color: Colors.white,
-            imageUrl: 'assets/images/memoji-5.png',
-            scale: 1.0,
-          ),
-        ),
-        Expanded(
-            child: Align(
-          alignment: Alignment.bottomCenter,
-          child: RoundedButton(
-              borderRadius: BorderRadius.circular(0.0),
+    return Drawer(
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(),
+      width: MediaQuery.sizeOf(context).width * 0.8,
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: Clickable(
+                onTap: () => Navigator.of(context).pop(),
+                semanticLabel: 'Close menu',
+                builder: (context, _) => const Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Icon(Icons.close, color: AppColors.ink),
+                ),
+              ),
+            ),
+            const SizedBox(height: 32),
+            Padding(
+              padding: const EdgeInsets.only(left: 28),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (var i = 0; i < items.length; i++)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: NavItem(
+                        title: items[i],
+                        selected: i == selected,
+                        style: AppText.display(22).copyWith(
+                          fontWeight:
+                              i == selected ? FontWeight.w600 : FontWeight.w400,
+                          color:
+                              i == selected ? AppColors.ink : AppColors.muted,
+                        ),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          onSelect(i);
+                        },
+                      ),
+                    ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Center(child: SocialIconsBar(width: 200)),
+            const SizedBox(height: 32),
+            const Center(
+              child: ProfileAvatar(image: 'assets/images/memoji-5.png'),
+            ),
+            const Spacer(),
+            RoundedButton(
+              label: 'Connect with Me',
               width: double.infinity,
-              label: "Connect with Me",
-              height: 80),
-        ))
-      ])),
-    );
-  }
-
-  List<Widget> _buildMenuList({
-    required BuildContext context,
-    required List<NavItemData> menuList,
-  }) {
-    TextTheme textTheme = Theme.of(context).textTheme;
-    List<Widget> menuItems = [];
-    for (var i = 0; i < menuList.length; i++) {
-      menuItems.add(
-        NavItem(
-          onTap: () => _onTapNavItem(
-            context: menuList[i].key,
-            navItemName: menuList[i].name,
-          ),
-          title: menuList[i].name.toLowerCase(),
-          isSelected: menuList[i].isSelected,
-          titleStyle: textTheme.bodyText1?.copyWith(
-            color: menuList[i].isSelected ? Colors.black : Colors.black,
-            fontSize: Sizes.TEXT_SIZE_18,
-            fontWeight:
-                menuList[i].isSelected ? FontWeight.bold : FontWeight.normal,
-          ),
+              height: 72,
+              borderRadius: BorderRadius.zero,
+              onTap: () => openUrl(PortfolioData.emailUrl),
+            ),
+          ],
         ),
-      );
-      // add spacer
-      menuItems.add(SpaceH16());
-    }
-    return menuItems;
-  }
-
-// ontap nav item action
-  _onTapNavItem({
-    required GlobalKey context,
-    required String navItemName,
-  }) {
-    for (int index = 0; index < widget.menuList.length; index++) {
-      if (navItemName == widget.menuList[index].name) {
-        scrollToSection(context.currentContext!);
-        setState(() {
-          widget.menuList[index].isSelected = true;
-        });
-        _closeDrawer();
-      } else {
-        widget.menuList[index].isSelected = false;
-      }
-    }
-  }
-
-  _closeDrawer() {
-    context.router.pop();
+      ),
+    );
   }
 }

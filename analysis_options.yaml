@@ -1,0 +1,7 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    # Source files from other repos, displayed in the "Show me the code" panel.
+    - assets/code/**
+    - build/**

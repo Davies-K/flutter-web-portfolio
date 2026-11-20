@@ -1,30 +1,50 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/main.dart';
+import 'package:portfolio/showcase/code_panel.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(FolioApp());
+  setUpAll(() {
+    GoogleFonts.config.allowRuntimeFetching = false;
+    VisibilityDetectorController.instance.updateInterval = Duration.zero;
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  testWidgets('home page renders key sections', (tester) async {
+    tester.view.physicalSize = const Size(1440, 900);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    await tester.pumpWidget(const FolioApp());
+    await tester.pump(const Duration(seconds: 2));
+
+    expect(find.text('Connect with Me'), findsOneWidget);
+    expect(find.text('Services'), findsWidgets);
+    expect(find.text('Resume'), findsWidgets);
+  });
+
+  testWidgets('show me the code panel opens and shows source', (tester) async {
+    tester.view.physicalSize = const Size(1440, 900);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(const FolioApp());
+    await tester.pump(const Duration(seconds: 2));
+
+    ShowcaseController.instance.open();
     await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('~/davies/show-me-the-code'), findsOneWidget);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await tester.tap(find.text('Code'));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 2));
+    expect(find.text('dashboard.dart'), findsOneWidget);
+
+    ShowcaseController.instance.close();
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('~/davies/show-me-the-code'), findsNothing);
   });
 }
